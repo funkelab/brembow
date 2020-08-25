@@ -98,9 +98,6 @@ class SimulateCages(gp.BatchFilter):
         raw = batch[self.raw]
         seg = batch[self.seg]
 
-        print(f"RAW: {raw}")
-        print(f"SEG: {seg}")
-
         # simulate cages, return brembow volumes for raw, cages, and density
         simulated_raw = Volume(raw.data, raw.spec.voxel_size)
         cage_map, density_map = simulate_random_cages(
@@ -122,7 +119,6 @@ class SimulateCages(gp.BatchFilter):
         density_map_spec.dtype = np.float32
 
         # create arrays and crop to requested size
-        print(cage_map_spec)
         cage_map_array = gp.Array(data=cage_map, spec=cage_map_spec)
         cage_map_array = cage_map_array.crop(request[self.cage_map].roi)
         density_map_array = gp.Array(data=density_map, spec=density_map_spec)

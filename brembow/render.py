@@ -2,6 +2,9 @@ from .volume import Volume
 from funlib.segment.arrays import replace_values
 import numpy as np
 import random
+import logging
+
+logger = logging.getLogger(__name__)
 
 
 def render_points(resolution, image, locations, point_spread_function):
@@ -206,8 +209,9 @@ def simulate_cages(volume, segmentation,
             continue
 
         if density is None:
-            print(f"WARNING: segment ID {id_element} does not have a density "
-                  "associated")
+            logger.warn(
+                f"WARNING: segment ID {id_element} does not have a density "
+                "associated")
             continue
 
         # create a binary mask
