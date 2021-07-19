@@ -17,6 +17,10 @@ class SimulateCages(gp.BatchFilter):
             volume. The segmentation is expected to be int valued with values
             between 1 and n. 0 will be treated as background.
 
+            fm_intensity (float): Render intensity for element 100 (Fermium),
+            to be used as reference point for cubic intensity transfer
+            function.
+
             psf (PointSpreadFunction): The PSF to use to render points.
 
             density_range (tuple of floats): The min and max density to
@@ -30,6 +34,7 @@ class SimulateCages(gp.BatchFilter):
             seg,
             cage_map,
             density_map,
+            fm_intensity,
             psf,
             density_range,
             cages,
@@ -61,6 +66,7 @@ class SimulateCages(gp.BatchFilter):
         self.seg = seg
         self.cage_map = cage_map
         self.density_map = density_map
+        self.fm_intensity = fm_intensity
         self.psf = psf
         self.min_density, self.max_density = density_range
         self.cages = cages
@@ -106,6 +112,7 @@ class SimulateCages(gp.BatchFilter):
             self.cages,
             self.min_density,
             self.max_density,
+            self.fm_intensity,
             self.psf,
             True,
             True,
